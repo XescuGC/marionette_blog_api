@@ -1,3 +1,4 @@
+require_relative 'to_hash'
 require_relative 'codes'
 require_relative 'errors'
 require_relative 'interactor'
