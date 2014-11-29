@@ -10,4 +10,6 @@ class Post
   attribute :updated_at,  Time
   attribute :body,        String
   attribute :preface,     String
+
+  validates :title, :created_at, :updated_at, :body, :preface, presence: true
 end
