@@ -4,4 +4,6 @@ class Tag
   include ActiveModel::Model
 
   attribute :name
+
+  validates :name, presence: true
 end
