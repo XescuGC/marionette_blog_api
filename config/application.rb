@@ -1,0 +1,23 @@
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'api'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
+require 'boot'
+require 'perpetuity/mongodb'
+require 'bson'
+require 'virtus'
+require 'active_model'
+
+Bundler.require :default, ENV['RACK_ENV']
+
+DB_NAME = 'marionette_blog' + '_' + ENV['RACK_ENV']
+
+Perpetuity.data_source :mongodb, DB_NAME
+
+Dir[File.expand_path('../../decorators/*.rb', __FILE__)].each { |f| require f }
+
+require_relative '../domine/domine'
+
+Dir[File.expand_path('../../api/*.rb', __FILE__)].each { |f| require f }
+
+require 'api'
