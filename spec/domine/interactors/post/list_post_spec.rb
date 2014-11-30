@@ -19,7 +19,7 @@ describe Interactors::ListPost do
         expect(response[:posts].count).to eq(1)
       }
     end
-    context 'if more than one post' do
+    context 'if more than one post should return them in order of creation (-1)' do
       let!(:request) { Helpers::Factories::Post.new_created_request }
       let!(:request2) { Helpers::Factories::Post.new_created_request }
       let!(:request3) { Helpers::Factories::Post.new_created_request }
@@ -27,6 +27,9 @@ describe Interactors::ListPost do
         response = subject.new.exec
 
         expect(response[:posts].count).to eq(3)
+        expect(response[:posts][0][:id]).to eq(request3[:post][:id])
+        expect(response[:posts][1][:id]).to eq(request2[:post][:id])
+        expect(response[:posts][2][:id]).to eq(request[:post][:id])
       }
     end
   end

@@ -29,7 +29,7 @@ class PostRepository
     end
 
     def all
-      self.repo.all.to_a
+      self.repo.all.sort(:created_at).reverse.to_a
     end
 
     def create(post:)
