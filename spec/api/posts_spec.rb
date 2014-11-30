@@ -31,6 +31,17 @@ describe MarionetteBlog::API do
       end
     end
     describe 'POST /posts' do
+      context 'must create a new Post' do
+        let(:request) { Helpers::Factories::Post.new_request }
+        it {
+          before_count = PostRepository.all.count
+          post '/posts', request
+
+          expect(last_response.status).to eq(201)
+          expect(json).to include("id")
+          expect(PostRepository.all.count).to eq(before_count + 1)
+        }
+      end
     end
     describe 'GET /posts/:id' do
     end
