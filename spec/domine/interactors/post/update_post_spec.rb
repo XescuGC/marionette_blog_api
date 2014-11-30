@@ -8,12 +8,10 @@ describe Interactors::UpdatePost do
     it {
       new_title = (0...8).map { (65 + rand(26)).chr }.join
       request[:post][:title] = new_title
-      before_count = PostRepository.all.count
       response = subject.new(request).exec
 
       expect(response[:post][:id]).to eq(request[:post][:id])
       expect(response[:post][:title]).to eq(new_title)
-      expect(PostRepository.all.count).to eq(before_count)
     }
   end
 
