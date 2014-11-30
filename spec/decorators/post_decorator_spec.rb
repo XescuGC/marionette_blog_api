@@ -57,7 +57,7 @@ describe PostDecorator do
           response = Interactors::DeletePost.new(request).exec
           decorated = subject.decorate_response(response)
 
-          expect(decorated).to eq('')
+          expect(decorated).to be_nil
         }
       end
     end
