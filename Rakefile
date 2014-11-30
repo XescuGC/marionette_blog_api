@@ -14,9 +14,12 @@ require 'rake'
 require 'rspec/core'
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec, :dir) do |t, task_args|
-  if task_args[:dir]
-    t.pattern = "spec/domine/#{task_args[:dir]}/**/*_spec.rb"
+desc "To run the Tests"
+RSpec::Core::RakeTask.new(:spec, :type, :dir) do |t, task_args|
+  if task_args[:type] && task_args[:dir]
+    t.pattern = "spec/#{task_args[:type]}/#{task_args[:dir]}/**/*_spec.rb"
+  elsif task_args[:type]
+    t.pattern = "spec/#{task_args[:type]}/**/*_spec.rb"
   end
 end
 
