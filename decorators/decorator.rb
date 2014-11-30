@@ -3,9 +3,16 @@ class Decorator
     attr_accessor :resource
     def decorate_response(response)
       if !response.key?(:errors)
-        entity = response.fetch(self.resource)
+        key = if response.key?(resource)
+                resource
+              elsif response.key?(resource.to_s.pluralize.to_sym)
+                resource.to_s.pluralize.to_sym
+              else
+                raise "Key #{resource} && #{resource.to_s.pluralize} not found"
+              end
+        entity = response.fetch(key)
         if entity.is_a?(Array)
-          entity.map{ |r| self.decorate(r)}# rescue []
+          entity.map{ |r| self.decorate(r)} rescue []
         else
           self.decorate(entity)
         end
