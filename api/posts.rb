@@ -13,6 +13,13 @@ module MarionetteBlog
         post = Interactors::CreatePost.new({post: params[:post]}).exec
         PostDecorator.decorate_response(post)
       end
+      route_param :id do
+        get do
+          status 200
+          post = Interactors::ShowPost.new({post: {id: params[:id]}}).exec
+          PostDecorator.decorate_response(post)
+        end
+      end
     end
   end
 end

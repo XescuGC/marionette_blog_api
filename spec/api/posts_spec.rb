@@ -44,6 +44,15 @@ describe MarionetteBlog::API do
       end
     end
     describe 'GET /posts/:id' do
+      context 'msut return a the same Post' do
+        let(:request) { Helpers::Factories::Post.new_created_request }
+        it {
+          get '/posts/' + request[:post][:id]
+
+          expect(last_response.status).to eq(200)
+          expect(json['id']).to eq(request[:post][:id])
+        }
+      end
     end
     describe 'PUT /posts/:id' do
     end
