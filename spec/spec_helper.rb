@@ -16,6 +16,7 @@ SimpleCov.start
 
 Dir[File.expand_path("../factories/*.rb", __FILE__)].each {|f| require f }
 Dir[File.expand_path("../helpers/*/*.rb", __FILE__)].each {|f| require f }
+Dir[File.expand_path("../helpers/*.rb", __FILE__)].each {|f| require f }
 Dir[File.expand_path("../shared/*.rb", __FILE__)].each {|f| require f }
 
 RSpec.configure do |config|
@@ -23,6 +24,7 @@ RSpec.configure do |config|
   config.expect_with :rspec
 
   config.include FactoryGirl::Syntax::Methods
+  config.include Helpers::JsonHelper
 
   DatabaseCleaner[:moped].db = DB_NAME
 
