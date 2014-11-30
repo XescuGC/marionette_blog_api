@@ -7,7 +7,7 @@ module Helpers
           if opts[:tags]
             {post: attributes_for(:post, tags: opts[:tags])}
           else
-            {post: attributes_for(:post)}
+            {post: attributes_for(:post, tags: [attributes_for(:tag)[:name]])}
           end
         end
 
