@@ -26,6 +26,10 @@ module Utils
       end
     end
 
+    def errors?
+      true
+    end
+
     class << self
       def create_error_from_object(object, options={})
         errors = []
