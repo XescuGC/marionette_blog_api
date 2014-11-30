@@ -26,6 +26,11 @@ module MarionetteBlog
           post = Interactors::UpdatePost.new({post: post_params}).exec
           PostDecorator.decorate_response(post)
         end
+        delete do
+          status 204
+          post = Interactors::DeletePost.new({post: {id: params[:id]}}).exec
+          PostDecorator.decorate_response(post)
+        end
       end
     end
   end

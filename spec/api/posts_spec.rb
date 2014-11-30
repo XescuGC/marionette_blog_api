@@ -68,6 +68,17 @@ describe MarionetteBlog::API do
       end
     end
     describe 'DELETE /posts/:id' do
+      context 'must delete the Post' do
+        let!(:request) { Helpers::Factories::Post.new_created_request }
+        it {
+          before_count = PostRepository.all.count
+          delete '/posts/' + request[:post][:id]
+
+          expect(last_response.status).to eq(204)
+          expect(last_response.body).to eq('')
+          expect(PostRepository.all.count).to eq(before_count - 1)
+        }
+      end
     end
   end
 end
