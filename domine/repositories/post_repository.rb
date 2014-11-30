@@ -40,5 +40,9 @@ class PostRepository
     def find_all_with_tag(tag:)
       self.repo.custom({'tags.name' => tag}).sort(:created_at).reverse.to_a
     end
+
+    def destroy(post:)
+      self.repo.delete(post)
+    end
   end
 end
