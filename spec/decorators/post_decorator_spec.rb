@@ -51,6 +51,15 @@ describe PostDecorator do
           })
         }
       end
+      context 'with no content' do
+        let!(:request) { Helpers::Factories::Post.new_created_request }
+        it {
+          response = Interactors::DeletePost.new(request).exec
+          decorated = subject.decorate_response(response)
+
+          expect(decorated).to eq('')
+        }
+      end
     end
     context 'if there are some errors' do
       let(:request) { Helpers::Factories::Post.new_request }

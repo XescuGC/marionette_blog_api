@@ -2,6 +2,7 @@ class Decorator
   class << self
     attr_accessor :resource
     def decorate_response(response)
+      return '' if response.nil?
       if !response.key?(:errors)
         key = if response.key?(resource)
                 resource
