@@ -15,6 +15,7 @@ I18n.enforce_available_locales = false
 SimpleCov.start
 
 Dir[File.expand_path("../factories/*.rb", __FILE__)].each {|f| require f }
+Dir[File.expand_path("../helpers/*/*.rb", __FILE__)].each {|f| require f }
 Dir[File.expand_path("../shared/*.rb", __FILE__)].each {|f| require f }
 
 RSpec.configure do |config|

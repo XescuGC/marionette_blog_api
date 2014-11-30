@@ -6,6 +6,10 @@ module Helpers
         def new_request
           {post: attributes_for(:post)}
         end
+
+        def new_created_request
+          Interactors::CreatePost.new(self.new_request).exec
+        end
       end
     end
   end

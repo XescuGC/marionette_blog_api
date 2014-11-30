@@ -19,6 +19,15 @@ class PostRepository
       Perpetuity[Post]
     end
 
+    def find(id:)
+      id = BSON::ObjectId.from_string(id) if id.is_a?(String)
+      self.repo.find(id)
+    end
+
+    def update(post:)
+      self.repo.save(post)
+    end
+
     def all
       self.repo.all.to_a
     end
