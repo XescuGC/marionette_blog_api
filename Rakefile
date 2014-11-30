@@ -14,7 +14,11 @@ require 'rake'
 require 'rspec/core'
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec)
+RSpec::Core::RakeTask.new(:spec, :dir) do |t, task_args|
+  if task_args[:dir]
+    t.pattern = "spec/domine/#{task_args[:dir]}/**/*_spec.rb"
+  end
+end
 
 task routes: :environment do
   MarionetteBlog::API::routes.each do |route|
