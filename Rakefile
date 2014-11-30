@@ -13,6 +13,7 @@ require 'rake'
 
 require 'rspec/core'
 require 'rspec/core/rake_task'
+require_relative 'config/environment'
 
 desc "To run the Tests"
 RSpec::Core::RakeTask.new(:spec, :type, :dir) do |t, task_args|
@@ -23,7 +24,8 @@ RSpec::Core::RakeTask.new(:spec, :type, :dir) do |t, task_args|
   end
 end
 
-task routes: :environment do
+desc 'Return the routes'
+task :routes do
   MarionetteBlog::API::routes.each do |route|
     p "#{route.route_method}  #{route.route_path} #{route.route_description}"
   end
