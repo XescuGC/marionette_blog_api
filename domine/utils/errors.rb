@@ -20,7 +20,7 @@ module Utils
     def initialize(message:, errors:)
       if errors.is_a?(Array)
         self.errors   = errors
-        self.message  = message || 'Chech the errors'
+        self.message  = message || Defaults[:message]
       else
         raise 'The errors field is not an array'
       end

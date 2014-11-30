@@ -52,5 +52,23 @@ describe PostDecorator do
         }
       end
     end
+    context 'if there are some errors' do
+      let(:request) { Helpers::Factories::Post.new_request }
+      it {
+        request[:post][:title] = nil
+        response = Interactors::CreatePost.new(request).exec
+        decorate = subject.decorate_response(response)
+        expect(decorate).to eq({
+          message: 'Check validation errors',
+          errors: [
+            {
+              resource: 'Post',
+              field:    :title,
+              code:     101
+            }
+          ]
+        })
+      }
+    end
   end
 end
