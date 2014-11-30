@@ -3,6 +3,8 @@ class Post
   include ActiveModel::Validations
   include ActiveModel::Model
 
+  include UpdateAttributes
+
   attribute :id,          BSON::ObjectId
   attribute :title,       String
   attribute :tags,        Array[Tag]

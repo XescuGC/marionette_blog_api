@@ -4,7 +4,7 @@ describe Interactors::CreatePost do
   subject { Interactors::CreatePost }
 
   context 'must create a valid Post' do
-    let(:request) { {post: attributes_for(:post)} }
+    let(:request) { Helpers::Factories::Post.new_request }
     it {
       before_count = PostRepository.all.count
       response = subject.new(request).exec
@@ -16,8 +16,9 @@ describe Interactors::CreatePost do
 
   describe 'must be invalid' do
     context 'if the Post is invalid' do
-      let(:request) { {post: attributes_for(:post, title: nil)} }
+    let(:request) { Helpers::Factories::Post.new_request }
       it {
+        request[:post][:title] = nil
         response = subject.new(request).exec
 
         expect(response).to include(:errors)
