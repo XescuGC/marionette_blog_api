@@ -42,6 +42,31 @@ describe MarionetteBlog::API do
           expect(PostRepository.all.count).to eq(before_count + 1)
         }
       end
+      describe 'must return error' do
+        context 'if the required params are missing' do
+          let!(:request) { Helpers::Factories::Post.new_request }
+          it {
+            request[:post].delete(:title)
+            request[:post].delete(:body)
+            before_count = PostRepository.all.count
+            post '/posts', request
+
+            expect(last_response.status).to eq(400)
+            expect(PostRepository.all.count).to eq(before_count)
+          }
+        end
+        context 'if there was an error' do
+          let(:request) { Helpers::Factories::Post.new_request }
+          it {
+            before_count = PostRepository.all.count
+            request[:post][:title] = nil
+            post '/posts', request
+
+            expect(last_response.status).to eq(422)
+            expect(PostRepository.all.count).to eq(before_count)
+          }
+        end
+      end
     end
     describe 'GET /posts/:id' do
       context 'msut return a the same Post' do
