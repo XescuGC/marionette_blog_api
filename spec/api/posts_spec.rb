@@ -55,6 +55,17 @@ describe MarionetteBlog::API do
       end
     end
     describe 'PUT /posts/:id' do
+      context 'must update the Post' do
+        let(:request) { Helpers::Factories::Post.new_created_request }
+        it {
+          new_title = (0...8).map { (65 + rand(26)).chr }.join
+          put '/posts/' + request[:post][:id], {post: {title: new_title}}
+
+          expect(last_response.status).to eq(200)
+          expect(json['id']).to eq(request[:post][:id])
+          expect(json['title']).to eq(new_title)
+        }
+      end
     end
     describe 'DELETE /posts/:id' do
     end

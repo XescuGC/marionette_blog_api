@@ -19,6 +19,13 @@ module MarionetteBlog
           post = Interactors::ShowPost.new({post: {id: params[:id]}}).exec
           PostDecorator.decorate_response(post)
         end
+        put do
+          status 200
+          post_params = params[:post]
+          post_params[:id] = params[:id]
+          post = Interactors::UpdatePost.new({post: post_params}).exec
+          PostDecorator.decorate_response(post)
+        end
       end
     end
   end
