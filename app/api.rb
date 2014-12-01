@@ -18,6 +18,7 @@ module MarionetteBlog
     helpers MarionetteBlog::Helpers::StatusIndentifier
 
     mount MarionetteBlog::Posts
+    mount MarionetteBlog::Tags
 
     route :any, '*path' do
       error!('Not Found', 404)

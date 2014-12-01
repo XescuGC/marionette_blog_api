@@ -8,16 +8,6 @@ describe MarionetteBlog::API do
   end
 
   describe 'Posts' do
-    describe 'Not Found' do
-      context 'must return a 404 if the URL is not found' do
-        it {
-          get '/asfasfasdf'
-
-          expect(last_response.status).to eq(404)
-          expect(json).to eq({'error' => 'Not Found'})
-        }
-      end
-    end
     describe 'GET /posts' do
       let!(:request) { Helpers::Factories::Post.new_created_request }
       context 'must get all the posts' do
@@ -38,6 +28,8 @@ describe MarionetteBlog::API do
         let!(:request3) { Helpers::Factories::Post.new_created_request(tags: [tag3[:name]]) }
         it {
           get '/posts?tag=surf'
+
+          expect(last_response.status).to eq(200)
           expect(json.count).to eq(2)
           expect(json.find_all{ |e| e['tags'].include?('surf')}.count).to eq(2)
         }

@@ -13,6 +13,8 @@ module Interactors
         if self.request[:filter][:tag]
           posts = _retrive_post_filtered_by(:tag, self.request[:filter][:tag])
           respond_with_success(posts, {scope: :posts})
+        else
+          []
         end
       else
         posts = PostRepository.all 
