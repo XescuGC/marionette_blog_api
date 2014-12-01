@@ -4,14 +4,8 @@ class Decorator
     def decorate_response(response)
       return nil if response.nil?
       if !response.key?(:errors)
-        key = if response.key?(resource)
-                resource
-              elsif response.key?(resource.to_s.pluralize.to_sym)
-                resource.to_s.pluralize.to_sym
-              else
-                raise "Key #{resource} && #{resource.to_s.pluralize} not found"
-              end
-        entity = response.fetch(key)
+        key = _correct_key(response)
+          entity = response.fetch(key)
         if entity.is_a?(Array)
           entity.map{ |r| self.decorate(r)} rescue []
         else
@@ -31,6 +25,16 @@ class Decorator
         field:    error[:field],
         code:     error[:code]
       }
+    end
+
+    def _correct_key(response)
+      if response.key?(self.resource)
+        self.resource
+      elsif response.key?(resource.to_s.pluralize.to_sym)
+        self.resource.to_s.pluralize.to_sym
+      else
+        raise "Key #{self.resource} && #{self.resource.to_s.pluralize} not found"
+      end
     end
   end
 end
