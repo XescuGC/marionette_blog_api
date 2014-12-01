@@ -48,7 +48,7 @@ To generate the documentation:
 
 ##Domain-Driven Design (DDD)
 
-This API uses [DDD]() set of patterns (more or less) you will see that the business logic is separeted from the rest of the app. All this business logic and business rules are stored at the `domain/` folder.
+This API uses [DDD](http://en.wikipedia.org/wiki/Domain-driven_design) set of patterns (more or less) you will see that the business logic is separeted from the rest of the app. All this business logic and business rules are stored at the `domain/` folder.
 
 In this folder we can found:
 
@@ -58,10 +58,4 @@ In this folder we can found:
 
 Basically what you achieve with this structure is to focus your development in what is important, the Domine. When this part is done, then you can proceed to add the Domine to whatever you whant, because it don't have any outside dependence, you could even create a gem with it and install it in you project and it will work.
 
-Fore more information about this structure see Robert C. Martin, aka, Uncle Bob that has a really good [video](http://youtube.com).
-
-
-
-
-
-
+Fore more information about this structure see Robert C. Martin, aka, Uncle Bob that has a really good [video](https://www.youtube.com/watch?v=WpkDN78P884).
