@@ -1,5 +1,6 @@
 module MarionetteBlog
   class PostsCreate < Grape::API
+    desc 'Call to Create a Post'
     params do
       requires :post, type: Hash do
         requires :title,   type: String

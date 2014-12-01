@@ -1,3 +1,4 @@
+# This is the Post Entity/Model representation with Virtus, it defines the attributes it has, the validations and the methods
 class Post
   include Virtus.model
   include ActiveModel::Validations

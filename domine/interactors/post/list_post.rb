@@ -1,4 +1,12 @@
 module Interactors
+  # This Interactors is in charge of Listing all Posts, it can work with no Hash for params, but if you whant to filter it you have to follow this structure:
+  #   {
+  #     filter: {
+  #       tag: 'name'
+  #     }
+  #   }
+  # 
+  # The result will be always OK, even if it's an empty array []
   class ListPost < Utils::Interactor
     def exec
       if self.request[:filter]

@@ -1,4 +1,18 @@
 module Interactors
+  # This Interactors is in charge of Creating a new Post, it expects a Hash object with the attributes of the Post
+  #   {
+  #     post: {
+  #       title: 'Title',
+  #       body: 'body here',
+  #       preface: 'preface here',
+  #       tags: [
+  #         'surf',
+  #         'tag'
+  #       ]
+  #     }
+  #   }
+  #
+  # It will return an error Hash or a Hash with the Created Post
   class CreatePost < Utils::Interactor
     def exec
       req_post = self.request[:post]

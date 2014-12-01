@@ -1,5 +1,6 @@
 module MarionetteBlog
   class PostsUpdate < Grape::API
+    desc 'Call to Update a Post'
     params do
       requires :post, type: Hash do
         optional :title,   type: String

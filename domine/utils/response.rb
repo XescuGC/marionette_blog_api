@@ -1,4 +1,6 @@
 module Utils
+  # This Class is used to convert the objects of the Domine in Hash objects, raw data, to then be accessibles for the rest of the app
+  # it serializes the object to convert it to a Hash
   class Response < Hash
     class << self
       def create_response_from_object(obj, options={})

@@ -1,4 +1,5 @@
 module Utils
+  # Module to define the basic .to_hash method
   module ToHash
     def to_hash
       instance_variables.inject({}) do |hash, var|

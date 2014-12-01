@@ -1,5 +1,6 @@
 module Utils
 
+  # This Class is the basic error represents one Error
   class Error
     include Utils::ToHash
     attr_accessor :code, :resource, :field
@@ -10,6 +11,7 @@ module Utils
     end
   end
 
+  # This Class is the formatter for the errors, it represents all the Errors of a Object
   class Errors
     include Utils::ToHash
     attr_accessor :errors, :message
@@ -26,11 +28,13 @@ module Utils
       end
     end
 
+    # To check if it has errors (used in the Interactor)
     def errors?
       true
     end
 
     class << self
+      # Creates all the structure for the Errors of the Oject
       def create_error_from_object(object, options={})
         errors = []
         object.errors.messages.each do |k, v|
@@ -39,12 +43,14 @@ module Utils
         new(message: (options[:message] || Defaults[:messasge]), errors: errors)
       end
 
+      # Created all the structure for one error
       def create_custom_error(error_sym, options={})
         error_options = Codes.find_code(error_sym)
         error = Error.new(code: error_options[:code], resource: options[:resource], field: options[:field])
         new(message: (options[:message] || error_options[:message] || Defaults[:message]), errors: [error])
       end
 
+      # Retrives the error code of the object field
       def error_code(object, field, error)
         Codes.matching_error_code(object, field)
       end
