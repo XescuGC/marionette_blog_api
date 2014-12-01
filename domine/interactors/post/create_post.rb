@@ -1,5 +1,6 @@
 module Interactors
-  # This Interactors is in charge of Creating a new Post, it expects a Hash object with the attributes of the Post
+  # This Interactors is in charge of Creating a new Post,
+  # it expects a Hash object with the attributes of the Post
   #   {
   #     post: {
   #       title: 'Title',
@@ -16,7 +17,7 @@ module Interactors
   class CreatePost < Utils::Interactor
     def exec
       req_post = self.request[:post]
-      tags = req_post[:tags].map{ |t| Tag.new(name: t) }
+      tags = req_post[:tags].map { |t| Tag.new(name: t) }
       post = Post.new(
         title:      req_post[:title],
         created_at: Time.now.utc,

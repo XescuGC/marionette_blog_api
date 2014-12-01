@@ -1,18 +1,19 @@
 module MarionetteBlog
+  # Defines all the API structure
   class API < Grape::API
     format :json
 
     rescue_from Grape::Exceptions::ValidationErrors do |e|
       errors = []
-      e.errors.each_pair do |k, v|
+      e.errors.each_pair do |k, _|
         match = k.match(/(?<resource>(.*))\[(?<attribute>(.*))\]/)
         if match
-          errors << { field: match[:attribute], resource: match[:resource], code: 101}
+          errors << { field: match[:attribute], resource: match[:resource], code: 101 }
         else
-          errors << { field: k, resource: nil, code: 101}
+          errors << { field: k, resource: nil, code: 101 }
         end
       end
-      Rack::Response.new([{message: "Params errors: #{e.message}", errors: errors}.to_json], 400).finish
+      Rack::Response.new([{ message: "Params errors: #{e.message}", errors: errors }.to_json], 400).finish
     end
 
     helpers MarionetteBlog::Helpers::StatusIndentifier

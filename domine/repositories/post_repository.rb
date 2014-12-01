@@ -1,4 +1,5 @@
-# This Class is the Mapper for the Post Class, is in charge of saving and retrieving the Posts
+# This Class is the Mapper for the Post Class,
+# is in charge of saving and retrieving the Posts
 class PostRepository
   Perpetuity.generate_mapper_for Tag do
     attribute :name
@@ -48,7 +49,7 @@ class PostRepository
 
     # Find all Posts with the followint tag
     def find_all_with_tag(tag:)
-      self.repo.custom({'tags.name' => tag}).sort(:created_at).reverse.to_a
+      self.repo.custom({ 'tags.name' => tag }).sort(:created_at).reverse.to_a
     end
 
     # Destroy the Post

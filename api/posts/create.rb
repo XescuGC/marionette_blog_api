@@ -1,4 +1,5 @@
 module MarionetteBlog
+  # Class that defines the PostCreate API
   class PostsCreate < Grape::API
     desc 'Call to Create a Post'
     params do
@@ -10,7 +11,7 @@ module MarionetteBlog
       end
     end
     post do
-      post = Interactors::CreatePost.new({post: params[:post]}).exec
+      post = Interactors::CreatePost.new(post: params[:post]).exec
       status correct_status(post, 201)
       PostDecorator.decorate_response(post)
     end

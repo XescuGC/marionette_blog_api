@@ -1,10 +1,11 @@
 module Utils
-  # This Class is used to convert the objects of the Domine in Hash objects, raw data, to then be accessibles for the rest of the app
+  # This Class is used to convert the objects of the Domine in Hash objects,
+  # raw data, to then be accessibles for the rest of the app
   # it serializes the object to convert it to a Hash
   class Response < Hash
     class << self
       def create_response_from_object(obj, options={})
-        return obj if obj == nil
+        return obj if obj.nil?
         hash_obj = if obj.is_a?(Array)
                      obj.map(&:to_hash).each do |item|
                        _object_to_hash(item)
@@ -22,7 +23,6 @@ module Utils
       def _object_to_hash(obj)
         obj.each do |item|
           if ingnore_types.include?(item[1].class)
-            #TODO Delete it
             next
           else
             obj[item[0]] = serialize(item[1])
@@ -31,7 +31,7 @@ module Utils
         obj
       end
 
-      def _array_to_hash array
+      def _array_to_hash(array)
         array.map do |item|
           if ingnore_types.include?(item.class)
             next
@@ -50,7 +50,7 @@ module Utils
           value.to_s
         elsif value.is_a?(Perpetuity::Reference)
           if options[:from] == :array
-            {id: value.id.to_s}
+            { id: value.id.to_s }
           else
             value.id.to_s
           end

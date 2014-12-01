@@ -1,4 +1,5 @@
 module MarionetteBlog
+  # Class that defines the PostUpdate API
   class PostsUpdate < Grape::API
     desc 'Call to Update a Post'
     params do
@@ -12,7 +13,7 @@ module MarionetteBlog
     put do
       post_params = params[:post]
       post_params[:id] = params[:id]
-      post = Interactors::UpdatePost.new({post: post_params}).exec
+      post = Interactors::UpdatePost.new(post: post_params).exec
       status correct_status(post, 200)
       PostDecorator.decorate_response(post)
     end

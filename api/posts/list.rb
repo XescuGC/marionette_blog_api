@@ -1,10 +1,11 @@
 module MarionetteBlog
+  # Class that defines the PostList API
   class PostsList < Grape::API
     desc 'Call to get all Posts'
     get do
       status 200
       posts = if params[:tag]
-                Interactors::ListPost.new({filter: {tag: params[:tag]}}).exec
+                Interactors::ListPost.new(filter: { tag: params[:tag] }).exec
               else
                 Interactors::ListPost.new.exec
               end

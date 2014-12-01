@@ -1,4 +1,6 @@
 module MarionetteBlog
+  # Class that defines all the API calls
+  # to interact with the Posts
   class Posts < Grape::API
     format :json
 

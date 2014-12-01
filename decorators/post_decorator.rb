@@ -1,10 +1,13 @@
+# This class is in charge of Decorationg the Post
 class PostDecorator < Decorator
   class << self
+    # Decorates the Post
     def decorate_response(response)
       self.resource = :post
       super(response)
     end
 
+    # Defines the single post decoration
     def decorate(item)
       {
         id:         item[:id],
@@ -17,7 +20,7 @@ class PostDecorator < Decorator
     end
 
     def _compose_tags(tags)
-      tags.map{ |t| t[:name] }
+      tags.map { |t| t[:name] }
     end
   end
 end

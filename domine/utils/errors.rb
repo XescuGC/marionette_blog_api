@@ -1,5 +1,4 @@
 module Utils
-
   # This Class is the basic error represents one Error
   class Error
     include Utils::ToHash
@@ -11,18 +10,19 @@ module Utils
     end
   end
 
-  # This Class is the formatter for the errors, it represents all the Errors of a Object
+  # This Class is the formatter for the errors,
+  # it represents all the Errors of a Object
   class Errors
     include Utils::ToHash
     attr_accessor :errors, :message
-    Defaults = {
+    DEFAULTS = {
       message: 'Check validation errors'
     }
 
     def initialize(message:, errors:)
       if errors.is_a?(Array)
         self.errors   = errors
-        self.message  = message || Defaults[:message]
+        self.message  = message || DEFAULTS[:message]
       else
         raise 'The errors field is not an array'
       end
@@ -38,16 +38,16 @@ module Utils
       def create_error_from_object(object, options={})
         errors = []
         object.errors.messages.each do |k, v|
-          errors << Error.new(code: error_code(object,k,v), resource: object.class.to_s, field: k)
+          errors << Error.new(code: error_code(object, k, v), resource: object.class.to_s, field: k)
         end
-        new(message: (options[:message] || Defaults[:messasge]), errors: errors)
+        new(message: (options[:message] || DEFAULTS[:messasge]), errors: errors)
       end
 
       # Created all the structure for one error
       def create_custom_error(error_sym, options={})
         error_options = Codes.find_code(error_sym)
         error = Error.new(code: error_options[:code], resource: options[:resource], field: options[:field])
-        new(message: (options[:message] || error_options[:message] || Defaults[:message]), errors: [error])
+        new(message: (options[:message] || error_options[:message] || DEFAULTS[:message]), errors: [error])
       end
 
       # Retrives the error code of the object field

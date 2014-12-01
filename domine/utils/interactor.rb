@@ -1,11 +1,9 @@
 module Utils
   # This class is the Parent of all the Interactors and describes the basic methods used for all the Interactors
   class Interactor
-
     attr_accessor :request
-
     # It creates the Request object for the Interactor
-    def initialize(request_or_hash = { })
+    def initialize(request_or_hash = {})
       if request_or_hash.is_a?(Hash)
         self.request = Request.try_convert(request_or_hash)
       else
@@ -26,10 +24,10 @@ module Utils
     # Creates the Error object and then creates a response withit
     def respond_with_error(object, options={})
       errors = nil
-      unless object.is_a?(Symbol)
-        errors = Utils::Errors.create_error_from_object(object)
-      else
+      if object.is_a?(Symbol)
         errors = _create_standar_error(object, options)
+      else
+        errors = Utils::Errors.create_error_from_object(object)
       end
       create_response(errors)
     end
