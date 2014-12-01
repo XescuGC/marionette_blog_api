@@ -78,6 +78,14 @@ describe MarionetteBlog::API do
           expect(json['id']).to eq(request[:post][:id])
         }
       end
+      context 'must return error if the post was not found' do
+        it {
+          get '/posts/' + '123'
+
+          expect(last_response.status).to eq(404)
+          expect(json).to include('errors')
+        }
+      end
     end
     describe 'PUT /posts/:id' do
       context 'must update the Post' do
@@ -91,6 +99,25 @@ describe MarionetteBlog::API do
           expect(json['title']).to eq(new_title)
         }
       end
+      describe 'must return error' do
+        context 'if the Post was not found' do
+          it {
+            put '/posts/' + '123', {post: {title: 'foo'}}
+
+            expect(last_response.status).to eq(404)
+            expect(json).to include('errors')
+          }
+        end
+        context 'if there was an error' do
+          let(:request) { Helpers::Factories::Post.new_created_request }
+          it {
+            request[:post][:title] = nil
+            put '/posts/' + request[:post][:id], {post: {title: nil}}
+
+            expect(last_response.status).to eq(422)
+          }
+        end
+      end
     end
     describe 'DELETE /posts/:id' do
       context 'must delete the Post' do
@@ -103,6 +130,17 @@ describe MarionetteBlog::API do
           expect(last_response.body).to eq('')
           expect(PostRepository.all.count).to eq(before_count - 1)
         }
+      end
+      describe 'must return an error' do
+        context 'if the Post was not found' do
+          it {
+            before_count = PostRepository.all.count
+            delete '/posts/' + '123'
+
+            expect(last_response.status).to eq(404)
+            expect(PostRepository.all.count).to eq(before_count)
+          }
+        end
       end
     end
   end

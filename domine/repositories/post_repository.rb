@@ -20,8 +20,12 @@ class PostRepository
     end
 
     def find(id:)
-      id = BSON::ObjectId.from_string(id) if id.is_a?(String)
-      self.repo.find(id)
+      begin
+        id = BSON::ObjectId.from_string(id) if id.is_a?(String)
+        self.repo.find(id)
+      rescue
+        return nil
+      end
     end
 
     def update(post:)

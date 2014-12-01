@@ -17,33 +17,34 @@ module MarionetteBlog
         end
       end
       post do
-        status 201
         post = Interactors::CreatePost.new({post: params[:post]}).exec
-        if post.key?(:errors)
-          if post[:errors].find{ |error| error[:code] == 105 }
-            status 404
-          else
-            status 422
-          end
-        end
+        status correct_status(post, 201)
         PostDecorator.decorate_response(post)
       end
       route_param :id do
         get do
-          status 200
           post = Interactors::ShowPost.new({post: {id: params[:id]}}).exec
+          status correct_status(post, 200)
           PostDecorator.decorate_response(post)
         end
+        params do
+          requires :post, type: Hash do
+            optional :title,   type: String
+            optional :body,    type: String
+            optional :preface, type: String
+            optional :tags,    type: Array
+          end
+        end
         put do
-          status 200
           post_params = params[:post]
           post_params[:id] = params[:id]
           post = Interactors::UpdatePost.new({post: post_params}).exec
+          status correct_status(post, 200)
           PostDecorator.decorate_response(post)
         end
         delete do
-          status 204
           post = Interactors::DeletePost.new({post: {id: params[:id]}}).exec
+          status correct_status(post, 204)
           PostDecorator.decorate_response(post)
         end
       end
