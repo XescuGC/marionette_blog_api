@@ -29,6 +29,19 @@ describe MarionetteBlog::API do
           expect(json.count).to eq(1)
         }
       end
+      context 'must get all filtered posts' do
+        let(:tag1)      { attributes_for(:tag, name: 'surf') }
+        let(:tag2)      { attributes_for(:tag, name: 'eat') }
+        let(:tag3)      { attributes_for(:tag, name: 'paly') }
+        let!(:request)  { Helpers::Factories::Post.new_created_request(tags: [tag1[:name], tag2[:name]]) }
+        let!(:request2) { Helpers::Factories::Post.new_created_request(tags: [tag1[:name], tag3[:name]]) }
+        let!(:request3) { Helpers::Factories::Post.new_created_request(tags: [tag3[:name]]) }
+        it {
+          get '/posts?tag=surf'
+          expect(json.count).to eq(2)
+          expect(json.find_all{ |e| e['tags'].include?('surf')}.count).to eq(2)
+        }
+      end
     end
     describe 'POST /posts' do
       context 'must create a new Post' do
