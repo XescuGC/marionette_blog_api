@@ -14,11 +14,12 @@ Bundler.require :default, ENV['RACK_ENV']
 DB_NAME = 'marionette_blog' + '_' + ENV['RACK_ENV']
 
 Perpetuity.data_source :mongodb, DB_NAME
-Dir[File.expand_path('../../api/helpers/*.rb', __FILE__)].each{ |f| require f }
+# Dir[File.expand_path('../../api/helpers/*.rb', __FILE__)].each{ |f| require f }
 
 require_relative '../decorators/decorators'
 require_relative '../domine/domine'
 
-Dir[File.expand_path('../../api/*.rb', __FILE__)].each { |f| require f }
+Dir[File.expand_path('../../api/**/*.rb', __FILE__)].each { |f| require f }
+# Dir[File.expand_path('../../api/*.rb', __FILE__)].each { |f| require f }
 
 require 'api'
