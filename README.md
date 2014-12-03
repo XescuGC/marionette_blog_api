@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/XescuGC/marionette_blog_api.svg?branch=master)][travis]
+
+[travis]: https://travis-ci.org/XescuGC/marionette_blog_api 
 #Welcome to MarioneteBlogApi
 
 This is an API that will be used for my MarionetteBlog in the future.
