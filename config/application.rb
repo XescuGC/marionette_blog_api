@@ -18,6 +18,8 @@ Perpetuity.data_source :mongodb, DB_NAME
 require_relative '../decorators/decorators'
 require_relative '../domine/domine'
 
-Dir[File.expand_path('../../api/**/*.rb', __FILE__)].each { |f| require f }
+require_relative '../api/api_require'
+
+# Dir[File.expand_path('../../api/**/*.rb', __FILE__)].each { |f| require f }
 
 require 'api'
