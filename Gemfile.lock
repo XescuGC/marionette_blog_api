@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:XescuGC/perpetuity-mongodb.git
+  remote: https://github.com/XescuGC/perpetuity-mongodb.git
   revision: e8e688ca41de76ed13d4862ea10827cfcf009b63
   branch: features
   specs:
@@ -8,14 +8,14 @@ GIT
       perpetuity (~> 1.0.0.beta)
 
 GIT
-  remote: git@github.com:XescuGC/perpetuity.git
+  remote: https://github.com/XescuGC/perpetuity.git
   revision: a835bf015d9a821544dbce7a39ada78dfaba9209
   branch: custom-query
   specs:
     perpetuity (1.0.0)
 
 GIT
-  remote: git@github.com:XescuGC/virtus.git
+  remote: https://github.com/XescuGC/virtus.git
   revision: 8ab6807535b1d12a22f846c43004a21444f669d4
   branch: localized
   specs:

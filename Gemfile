@@ -3,9 +3,9 @@ source 'http://rubygems.org'
 gem 'rack', '~> 1.4.1'
 gem 'grape', '~> 0.8.0'
 
-gem 'virtus', git: 'git@github.com:XescuGC/virtus.git', branch: 'localized'
-gem 'perpetuity', git: 'git@github.com:XescuGC/perpetuity.git', branch: 'custom-query'
-gem 'perpetuity-mongodb', git: 'git@github.com:XescuGC/perpetuity-mongodb.git', branch: 'features'
+gem 'virtus', git: 'https://github.com/XescuGC/virtus.git', branch: 'localized'
+gem 'perpetuity', git: 'https://github.com/XescuGC/perpetuity.git', branch: 'custom-query'
+gem 'perpetuity-mongodb', git: 'https://github.com/XescuGC/perpetuity-mongodb.git', branch: 'features'
 gem 'activemodel', '~> 4.1.6'
 
 gem 'grape-swagger', '0.8.0'
