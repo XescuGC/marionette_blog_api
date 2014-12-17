@@ -7,5 +7,6 @@ services:
   - mongodb
 
 cache: bundler
+#cache: false
 
 script: 'bundle exec rake spec'
