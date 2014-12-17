@@ -6,7 +6,6 @@ class PostRepository
   end
 
   Perpetuity.generate_mapper_for Post do
-    attribute :id
     attribute :title
     attribute :created_at
     attribute :updated_at

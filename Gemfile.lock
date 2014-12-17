@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/XescuGC/perpetuity-mongodb.git
-  revision: e8e688ca41de76ed13d4862ea10827cfcf009b63
+  revision: 6fde68c85c7879a4ec08e2f4bec4bef7f77ccaf5
   branch: features
   specs:
     perpetuity-mongodb (1.0.0.beta)
