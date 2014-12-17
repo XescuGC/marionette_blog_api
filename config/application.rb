@@ -16,7 +16,7 @@ DB_NAME = 'marionette_blog' + '_' + ENV['RACK_ENV']
 Perpetuity.data_source :mongodb, DB_NAME
 
 require_relative '../decorators/decorators'
-require_relative '../domine/domine'
+require_relative '../domaine/domaine'
 
 require_relative '../api/api_require'
 
